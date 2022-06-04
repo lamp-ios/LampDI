@@ -1,5 +1,4 @@
 import Foundation
-import UIKit
 
 final class MyViewController {
     private var viewModel: MyViewModel
@@ -12,13 +11,15 @@ final class MyViewController {
 final class MyViewModel {
     private var superSvc: SuperService
     
-    init(superSvc: SuperService) {
+    init(superSvc: SuperService = .shared) {
         self.superSvc = superSvc
     }
 }
 
 final class SuperService {
-    init() {
+    static let shared: SuperService = .init()
+    
+    private init() {
     }
 }
 
@@ -26,10 +27,10 @@ final class SuperService {
 // MARK: - Usage
 
 private func test() {
-    let service = SuperService()
-    let viewModel = MyViewModel(
-        superSvc: service
-    )
+//    let service = SuperService()
+    
+    let viewModel = MyViewModel()
+    
     let viewController = MyViewController(
         viewModel: viewModel
     )
